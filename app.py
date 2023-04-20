@@ -7,7 +7,7 @@ import pickle
 import string
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-from pandas import pd
+import pandas as pd
 
 # ps = PorterStemmer()
 
