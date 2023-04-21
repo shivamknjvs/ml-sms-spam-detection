@@ -1,7 +1,7 @@
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
-
+import base64
 import streamlit as st
 import pickle 
 import string
