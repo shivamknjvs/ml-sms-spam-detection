@@ -29,7 +29,7 @@ def app():
         # Remove stop words, stem, and convert to lowercase
 
         # Extract features from the SMS data
-        X = tk.transform(df['text'])
+        X = vectorizer.transform(df['text'])
 
         # Use the trained model to make predictions
         y_pred = model.predict(X)
@@ -37,16 +37,19 @@ def app():
         # Add the predicted labels to the DataFrame
         df['label'] = y_pred
 
-        # Download the labeled CSV file
-#         labeled_df = predict(df)
-#         labeled_df.to_csv("labeled_sms.csv", index=False)
+        # Generate the labeled CSV file and save it to a file
+        labeled_df = df[['text', 'label']]
+        labeled_csv = labeled_df.to_csv(index=False)
 
-# # Download the labeled CSV file
-#         with open("labeled_sms.csv", "rb") as f:
-#                bytes_data = f.read()
-        st.download_button(label="Download labeled CSV", data=bytes_data, file_name="labeled_sms.csv", mime="text/csv")
-#         st.download_button(label="Download labeled CSV", data=df.to_csv(), file_name="labeled_sms.csv", mime="text/csv")
+        # Create a download button for the labeled CSV file
+        def download_labeled_csv():
+            b64 = base64.b64encode(labeled_csv.encode()).decode()
+            href = f'<a href="data:file/csv;base64,{b64}" download="labeled_sms.csv">Download labeled CSV</a>'
+            return href
 
+        # Display the download button
+        st.markdown(download_labeled_csv(), unsafe_allow_html=True)
+        
 app()
 
 # def transform_text(text):
