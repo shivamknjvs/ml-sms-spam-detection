@@ -38,7 +38,7 @@ def app():
         df['label'] = y_pred
 
         # Download the labeled CSV file
-        labeled_df = predict_labels(df)
+        labeled_df = predict(df)
         labeled_df.to_csv("labeled_sms.csv", index=False)
 
 # Download the labeled CSV file
