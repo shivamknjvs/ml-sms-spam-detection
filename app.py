@@ -29,7 +29,7 @@ def app():
         # Remove stop words, stem, and convert to lowercase
 
         # Extract features from the SMS data
-        X = vectorizer.transform(df['text'])
+        X = tk.transform(df['text'])
 
         # Use the trained model to make predictions
         y_pred = model.predict(X)
