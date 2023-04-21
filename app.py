@@ -38,7 +38,14 @@ def app():
         df['label'] = y_pred
 
         # Download the labeled CSV file
-        st.download_button(label="Download labeled CSV", data=df.to_csv(), file_name="labeled_sms.csv", mime="text/csv")
+        labeled_df = predict_labels(df)
+        labeled_df.to_csv("labeled_sms.csv", index=False)
+
+# Download the labeled CSV file
+        with open("labeled_sms.csv", "rb") as f:
+        bytes_data = f.read()
+        st.download_button(label="Download labeled CSV", data=bytes_data, file_name="labeled_sms.csv", mime="text/csv")
+#         st.download_button(label="Download labeled CSV", data=df.to_csv(), file_name="labeled_sms.csv", mime="text/csv")
 
 app()
 
